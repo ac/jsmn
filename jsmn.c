@@ -87,6 +87,7 @@ static int jsmn_parse_string(jsmn_parser *parser, const char *js,
 
 	int start = parser->pos;
 
+	char startq = js[parser->pos];
 	parser->pos++;
 
 	/* Skip starting quote */
@@ -94,7 +95,7 @@ static int jsmn_parse_string(jsmn_parser *parser, const char *js,
 		char c = js[parser->pos];
 
 		/* Quote: end of string */
-		if (c == '\"') {
+		if (c == startq) {
 			if (tokens == NULL) {
 				return 0;
 			}
@@ -117,7 +118,7 @@ static int jsmn_parse_string(jsmn_parser *parser, const char *js,
 			switch (js[parser->pos]) {
 				/* Allowed escaped symbols */
 				case '\"': case '/' : case '\\' : case 'b' :
-				case 'f' : case 'r' : case 'n'  : case 't' :
+				case 'f' : case 'r' : case 'n'  : case 't' : case '\'':
 					break;
 				/* Allows escaped symbol \uXXXX */
 				case 'u':
@@ -228,7 +229,7 @@ int jsmn_parse(jsmn_parser *parser, const char *js, size_t len,
 				}
 #endif
 				break;
-			case '\"':
+			case '\"': case '\'':
 				r = jsmn_parse_string(parser, js, len, tokens, num_tokens);
 				if (r < 0) return r;
 				count++;
