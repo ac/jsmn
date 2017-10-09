@@ -7,9 +7,9 @@ libjsmn.a: jsmn.o
 	$(AR) rc $@ $^
 
 %.o: %.c jsmn.h
-	$(CC) -c $(CFLAGS) $< -o $@
+	$(CC) -coverage -c $(CFLAGS) $< -o $@
 
-test: test_default test_strict test_links test_strict_links
+test: test_default test_strict test_links test_strict_links test_cov
 test_default: test/tests.c
 	$(CC) $(CFLAGS) $(LDFLAGS) $< -o test/$@
 	./test/$@
@@ -22,6 +22,8 @@ test_links: test/tests.c
 test_strict_links: test/tests.c
 	$(CC) -DJSMN_STRICT=1 -DJSMN_PARENT_LINKS=1 $(CFLAGS) $(LDFLAGS) $< -o test/$@
 	./test/$@
+test_cov: test/tests.c
+	gcov test/tests.c
 
 jsmn_test.o: jsmn_test.c libjsmn.a
 
