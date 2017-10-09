@@ -2,6 +2,7 @@ JSMN
 ====
 
 [![Build Status](https://travis-ci.org/ac/jsmn.svg?branch=master)](https://travis-ci.org/ac/jsmn)
+[![codecov](https://codecov.io/gh/ac/jsmn/branch/master/graph/badge.svg)](https://codecov.io/gh/ac/jsmn)
 
 jsmn (pronounced like 'jasmine') is a minimalistic JSON parser in C.  It can be
 easily integrated into resource-limited or embedded projects.
