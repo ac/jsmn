@@ -14,7 +14,7 @@ test_default: test/tests.c
 	$(CC) $(CFLAGS) $(LDFLAGS) $< -o test/$@
 	./test/$@
 test_strict: test/tests.c
-	$(CC) -DJSMN_STRICT=1 $(CFLAGS) $(LDFLAGS) $< -o test/$@
+	$(CC) -coverage -DJSMN_STRICT=1 $(CFLAGS) $(LDFLAGS) $< -o test/$@
 	./test/$@
 test_links: test/tests.c
 	$(CC) -DJSMN_PARENT_LINKS=1 $(CFLAGS) $(LDFLAGS) $< -o test/$@
